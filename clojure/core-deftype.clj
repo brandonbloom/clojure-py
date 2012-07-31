@@ -141,7 +141,7 @@
     (let [[interfaces methods] (parse-opts+specs opts+specs)
           methods (zipmap (map name (keys methods))
                           (map #(cons 'fn %) (vals methods)))]
-         `(let [~'type (py/type ~"nm"
+         `(let [~'type (py/type ~(name (gensym "reified"))
                                (py/tuple ~(vec (concat interfaces [py/object])))
                                (.toDict ~methods))]
 
